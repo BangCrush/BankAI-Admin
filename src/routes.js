@@ -8,6 +8,7 @@ import ThemePage from './pages/theme';
 import LoginPage from './pages/login';
 import BarChartPage from './pages/BarChart';
 import LineChartPage from './pages/LineChart';
+import BarChartPage from './pages/BarChart';
 
 export const routes = [
   {
@@ -43,6 +44,10 @@ export const routes = [
       }
         path: 'line-chart',
         element: <LineChartPage />,
+      },
+      {
+        path: 'bar-chart',
+        element: <BarChartPage />,
       },
     ],
   },
