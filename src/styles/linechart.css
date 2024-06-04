@@ -1,0 +1,23 @@
+.contentWrap {
+  padding-top: 30px;
+}
+
+.contentInner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.contentChart {
+  width: 80%;
+  height: 80%;
+  margin: auto;
+  padding: 20px 15px 0px 20px;
+}
+
+.chartTitle {
+  padding-left: 200px;
+  font-weight: bold;
+  font-size: large;
+  color: #8785F6;
+}

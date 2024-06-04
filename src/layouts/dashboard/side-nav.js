@@ -44,7 +44,7 @@ export const SideNav = () => {
               <ListItemIcon
                 sx={{
                   minWidth: 'auto',
-                  color: active ? 'primary.main' : 'neutral.400'
+                  color: active ? '#8785F6' : 'neutral.400'
                 }}
               >
                 {item.icon}
@@ -54,7 +54,7 @@ export const SideNav = () => {
                 primaryTypographyProps={{
                   variant: 'caption',
                   sx: {
-                    color: active ? 'primary.main' : 'text.secondary'
+                    color: active ? '#8785F6' : 'text.secondary'
                   }
                 }}
               />
