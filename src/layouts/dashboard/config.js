@@ -1,9 +1,6 @@
 import ChartPieIcon from "@heroicons/react/24/solid/ChartPieIcon"
 import PresentationChartLineIcon from "@heroicons/react/24/solid/PresentationChartLineIcon"
-import DocumentTextIcon from "@heroicons/react/24/solid/DocumentTextIcon"
-import ExclamationTriangleIcon from "@heroicons/react/24/solid/ExclamationTriangleIcon"
-import ShoppingCartIcon from "@heroicons/react/24/solid/ShoppingCartIcon"
-import StarIcon from "@heroicons/react/24/solid/StarIcon"
+import ChartBarIcon from "@heroicons/react/24/solid/ChartBarIcon"
 import { SvgIcon } from '@mui/material';
 
 export const items = [
@@ -14,16 +11,16 @@ export const items = [
         <ChartPieIcon />
       </SvgIcon>
     ),
-    label: 'Home'
+    label: 'PieChart'
   },
   {
     href: '/orders',
     icon: (
       <SvgIcon>
-        <ShoppingCartIcon />
+        <ChartBarIcon />
       </SvgIcon>
     ),
-    label: 'Orders'
+    label: 'BarChart'
   },
   {
     href: '/line-chart',
@@ -33,32 +30,5 @@ export const items = [
       </SvgIcon>
     ),
     label: 'LineChart'
-  },
-  {
-    href: '/theme',
-    icon: (
-      <SvgIcon>
-        <DocumentTextIcon />
-      </SvgIcon>
-    ),
-    label: 'Theme'
-  },
-  {
-    href: '/icons',
-    icon: (
-      <SvgIcon>
-        <StarIcon />
-      </SvgIcon>
-    ),
-    label: 'Icons'
-  },
-  {
-    href: '/404',
-    icon: (
-      <SvgIcon>
-        <ExclamationTriangleIcon />
-      </SvgIcon>
-    ),
-    label: 'Error'
   }
 ];
