@@ -1,6 +1,7 @@
 import { Link as RouterLink } from 'react-router-dom';
 import { Avatar, Box, Link, Stack } from '@mui/material';
-import { Logo } from 'src/components/logo';
+import Logo from 'src/components/logo';
+import LoginIcon from '@mui/icons-material/Login';
 
 const TOP_NAV_HEIGHT = 64;
 
@@ -12,7 +13,7 @@ export const TopNav = () => (
       color: 'common.white',
       position: 'fixed',
       width: '100%',
-      zIndex: (theme) => theme.zIndex.appBar
+      zIndex: (theme) => theme.zIndex.appBar,
     }}
   >
     <Stack
@@ -20,43 +21,38 @@ export const TopNav = () => (
       justifyContent="space-between"
       sx={{
         minHeight: TOP_NAV_HEIGHT,
-        px: 3
+        px: 3,
       }}
     >
-      <Stack
-        alignItems="center"
-        direction="row"
-        spacing={3}
-      >
+      <Stack alignItems="center" direction="row" spacing={3}>
         <Box
           component={RouterLink}
           to="/"
           sx={{
             display: 'inline-flex',
-            height: 24,
-            width: 24
+            height: 50,
+            width: 50,
           }}
         >
           <Logo />
         </Box>
       </Stack>
-      <Stack
-        alignItems="center"
-        direction="row"
-        spacing={2}
-      >
+      <Stack alignItems="center" direction="row" spacing={2}>
+        {/* 비로그인 상태 - 로그인 페이지 이동*/}
         <Link
           color="inherit"
-          href="https://mui.com/store/items/carpatin-dashboard"
-          target="_blank"
+          component={RouterLink}
+          to="/login"
           variant="body2"
         >
-          See Pro Version
+          <LoginIcon />
         </Link>
-        <Avatar
+
+        {/* 로그인 상태 */}
+        {/* <Avatar
           src="/assets/avatars/avatar-chen-simmons.jpg"
           variant="rounded"
-        />
+        /> */}
       </Stack>
     </Stack>
   </Box>

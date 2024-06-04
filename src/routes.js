@@ -6,6 +6,7 @@ import OrdersPage from './pages/orders';
 import ReportsPage from './pages';
 import SettingsPage from './pages/settings';
 import ThemePage from './pages/theme';
+import LoginPage from './pages/login';
 
 export const routes = [
   {
@@ -17,32 +18,36 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <ReportsPage />
+        element: <ReportsPage />,
       },
       {
         path: 'orders',
-        element: <OrdersPage />
+        element: <OrdersPage />,
       },
       {
         path: 'settings',
-        element: <SettingsPage />
+        element: <SettingsPage />,
       },
       {
         path: 'theme',
-        element: <ThemePage />
+        element: <ThemePage />,
       },
       {
         path: 'icons',
-        element: <IconsPage />
-      }
-    ]
+        element: <IconsPage />,
+      },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+    ],
   },
   {
     path: '404',
-    element: <NotFoundPage />
+    element: <NotFoundPage />,
   },
   {
     path: '*',
-    element: <NotFoundPage />
-  }
+    element: <NotFoundPage />,
+  },
 ];
