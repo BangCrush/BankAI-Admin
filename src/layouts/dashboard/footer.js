@@ -8,27 +8,24 @@ export const Footer = () => (
         display: 'flex',
         flexDirection: {
           xs: 'column',
-          sm: 'row'
+          sm: 'row',
         },
         py: 3,
         '& a': {
           mt: {
             xs: 1,
-            sm: 0
+            sm: 0,
           },
           '&:not(:last-child)': {
             mr: {
               xs: 0,
-              sm: 5
-            }
-          }
-        }
+              sm: 5,
+            },
+          },
+        },
       }}
     >
-      <Typography
-        color="text.secondary"
-        variant="caption"
-      >
+      <Typography color="text.secondary" variant="caption">
         © 2024 BankAi
       </Typography>
     </Container>
