@@ -1,15 +1,4 @@
-import { Box, Container, Link, Typography } from '@mui/material';
-
-const items = [
-  {
-    label: 'About Us',
-    href: 'https://devias.io/about-us'
-  },
-  {
-    label: 'Terms',
-    href: 'https://devias.io/legal/tos'
-  }
-];
+import { Container, Typography } from '@mui/material';
 
 export const Footer = () => (
   <div>
@@ -40,21 +29,8 @@ export const Footer = () => (
         color="text.secondary"
         variant="caption"
       >
-        © 2023 Devias
+        © 2024 BankAi
       </Typography>
-      <Box sx={{ flexGrow: 1 }} />
-      {items.map((link) => (
-        <Link
-          color="text.secondary"
-          href={link.href}
-          key={link.label}
-          target="_blank"
-          underline="none"
-          variant="body2"
-        >
-          {link.label}
-        </Link>
-      ))}
     </Container>
   </div>
 );

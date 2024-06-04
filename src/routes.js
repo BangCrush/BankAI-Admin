@@ -2,12 +2,12 @@ import { Outlet } from 'react-router-dom';
 import { Layout as DashboardLayout } from './layouts/dashboard/layout';
 import IconsPage from './pages/icons';
 import NotFoundPage from './pages/404';
-import OrdersPage from './pages/orders';
 import ReportsPage from './pages';
 import SettingsPage from './pages/settings';
 import ThemePage from './pages/theme';
 import LoginPage from './pages/login';
 import BarChartPage from './pages/BarChart';
+import LineChartPage from './pages/LineChart';
 
 export const routes = [
   {
@@ -20,10 +20,6 @@ export const routes = [
       {
         index: true,
         element: <ReportsPage />,
-      },
-      {
-        path: 'orders',
-        element: <OrdersPage />,
       },
       {
         path: 'settings',
@@ -45,6 +41,9 @@ export const routes = [
         path: 'bar-chart',
         element: <BarChartPage />,
       }
+        path: 'line-chart',
+        element: <LineChartPage />,
+      },
     ],
   },
   {
