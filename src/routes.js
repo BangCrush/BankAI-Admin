@@ -41,7 +41,8 @@ export const routes = [
       {
         path: 'bar-chart',
         element: <BarChartPage />,
-      }
+      },
+      {
         path: 'line-chart',
         element: <LineChartPage />,
       },
