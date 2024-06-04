@@ -8,7 +8,6 @@ import ThemePage from './pages/theme';
 import LoginPage from './pages/login';
 import BarChartPage from './pages/BarChart';
 import LineChartPage from './pages/LineChart';
-import BarChartPage from './pages/BarChart';
 
 export const routes = [
   {

@@ -14,7 +14,7 @@ export const items = [
     label: 'PieChart',
   },
   {
-    href: '/orders',
+    href: '/bar-chart',
     icon: (
       <SvgIcon>
         <ChartBarIcon />
