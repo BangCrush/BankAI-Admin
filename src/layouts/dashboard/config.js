@@ -1,5 +1,5 @@
 import ChartPieIcon from "@heroicons/react/24/solid/ChartPieIcon"
-import CogIcon from "@heroicons/react/24/solid/CogIcon"
+import PresentationChartLineIcon from "@heroicons/react/24/solid/PresentationChartLineIcon"
 import DocumentTextIcon from "@heroicons/react/24/solid/DocumentTextIcon"
 import ExclamationTriangleIcon from "@heroicons/react/24/solid/ExclamationTriangleIcon"
 import ShoppingCartIcon from "@heroicons/react/24/solid/ShoppingCartIcon"
@@ -26,13 +26,13 @@ export const items = [
     label: 'Orders'
   },
   {
-    href: '/settings',
+    href: '/line-chart',
     icon: (
       <SvgIcon>
-        <CogIcon />
+        <PresentationChartLineIcon />
       </SvgIcon>
     ),
-    label: 'Settings'
+    label: 'LineChart'
   },
   {
     href: '/theme',
