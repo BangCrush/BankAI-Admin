@@ -21,7 +21,7 @@ const now = new Date();
 const Page = () => (
   <>
     <Helmet>
-      <title>Overview | Carpatin Free</title>
+      <title>BankAi - Admin</title>
     </Helmet>
     <Box sx={{ flexGrow: 1, py: 8 }}>
       <Container maxWidth="xl">
