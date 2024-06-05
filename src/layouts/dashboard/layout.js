@@ -1,6 +1,5 @@
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
-import { Footer } from './footer';
 import { SideNav } from './side-nav';
 import { TopNav } from './top-nav';
 
@@ -35,7 +34,6 @@ export const Layout = (props) => {
       <LayoutRoot>
         <LayoutContainer>
           {children}
-          <Footer />
         </LayoutContainer>
       </LayoutRoot>
     </>

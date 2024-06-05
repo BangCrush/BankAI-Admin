@@ -27,7 +27,7 @@ export const TopNav = () => (
       <Stack alignItems="center" direction="row" spacing={3}>
         <Box
           component={RouterLink}
-          to="/"
+          to="/line-chart"
           sx={{
             display: 'inline-flex',
             height: 50,
