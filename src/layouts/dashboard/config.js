@@ -11,7 +11,7 @@ export const items = [
         <ChartPieIcon />
       </SvgIcon>
     ),
-    label: 'PieChart',
+    label: 'ProdType',
   },
   {
     href: '/bar-chart',
@@ -20,7 +20,7 @@ export const items = [
         <ChartBarIcon />
       </SvgIcon>
     ),
-    label: 'BarChart',
+    label: 'Product',
   },
   {
     href: '/line-chart',
@@ -29,6 +29,6 @@ export const items = [
         <PresentationChartLineIcon />
       </SvgIcon>
     ),
-    label: 'LineChart',
+    label: 'Account',
   },
 ];

@@ -24,13 +24,15 @@ const LayoutContainer = styled('div')({
   width: '100%'
 });
 
+const userToken = localStorage.getItem("token");
+
 export const Layout = (props) => {
   const { children } = props;
 
   return (
     <>
       <TopNav />
-      <SideNav />
+      {userToken && <SideNav />} {/* userToken이 있을 때만 SideNav 렌더링 */}
       <LayoutRoot>
         <LayoutContainer>
           {children}
