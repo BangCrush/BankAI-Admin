@@ -5,6 +5,14 @@ import Box from '@mui/material/Box';
 import { grey } from '@mui/material/colors';
 import CustomBarChart from 'src/charts/CustomBarChart';
 import { Container, Typography } from '@mui/material';
+import '../styles/chart.css';
+
+const productTypeNames = {
+  CHECKING: '입출금',
+  DEPOSIT: '예금',
+  SAVINGS: '적금',
+  LOAN: '대출',
+};
 
 const BarChart = () => {
   const [data, setData] = useState({});
@@ -20,7 +28,15 @@ const BarChart = () => {
         }}
         sx={{
           color: grey[600],
-          backgroundColor: productType === type ? grey[200] : 'transparent',
+          backgroundColor: productType === type ? 'rgba(135, 133, 246, 0.2)' : 'transparent',
+          '&:hover': {
+            borderColor: '#8785F6',
+            backgroundColor: 'rgba(135, 133, 246, 0.2)',
+          },
+          '&.Mui-selected': {
+            borderColor: '#8785F6',
+            backgroundColor: 'rgba(135, 133, 246, 0.2)',
+          },
         }}
       >
         {value}
@@ -86,22 +102,30 @@ const BarChart = () => {
   return (
     <Container
       maxWidth="xl"
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        // justifyContent: 'center',
-        // alignContent: 'center',
-        alignItems: 'center',
-      }}
     >
-      {isLoading ? (
-        <Typography variant="h1" sx={{ color: grey[800] }}>
-          상품 종류를 선택하세요
-        </Typography>
-      ) : (
-        <CustomBarChart dataByType={dataByType} />
-      )}
-      <SelectProductTypeBtnGroup />
+      <div className='contentWrap'>
+        {isLoading ? (
+          <Typography variant="h5" 
+            sx={{
+              color: grey[600],
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }
+            }>
+            상품 종류를 선택하세요
+          </Typography>
+        ) : (
+          <>
+            <div className='barchartTitle'>{productTypeNames[productType]} 상품별 가입자 연령대 통계</div>
+            <div className="contentChart">
+              <CustomBarChart dataByType={dataByType} />
+            </div>
+          </>
+        )}
+        <SelectProductTypeBtnGroup />
+      </div>
+      
     </Container>
   );
 };

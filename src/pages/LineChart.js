@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import '../styles/linechart.css';
+import '../styles/chart.css';
 
 ChartJS.register(
   CategoryScale,

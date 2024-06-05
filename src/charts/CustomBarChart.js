@@ -31,14 +31,6 @@ export const options = {
     legend: {
       position: 'right',
     },
-    title: {
-      display: true,
-      text: '상품별 각 연령대 가입자 수',
-      font: {
-        size: 30,
-        weight: '500',
-      },
-    },
   },
 };
 
@@ -63,8 +55,8 @@ const CustomBarChart = ({ dataByType }) => {
       {
         label: '40대',
         data: dataByType.map((item) => item.joinCnt.ageGroup40),
-        borderColor: 'rgb(255, 205, 86)',
-        backgroundColor: 'rgba(255, 205, 86, 0.5)',
+        borderColor: 'rgb(255, 220, 86)',
+        backgroundColor: 'rgba(255, 220, 86, 0.5)',
       },
       {
         label: '50대',
@@ -85,7 +77,7 @@ const CustomBarChart = ({ dataByType }) => {
         backgroundColor: 'rgba(0, 0, 128, 0.5)',
       },
       {
-        label: '80대',
+        label: '80대 이상',
         data: dataByType.map((item) => item.joinCnt.ageGroup80),
         borderColor: 'rgb(153, 102, 255)',
         backgroundColor: 'rgba(153, 102, 255, 0.5)',
