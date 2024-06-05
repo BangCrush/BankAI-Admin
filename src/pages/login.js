@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 const Button = ({ value, onClick }) => {
   return (
     <button
@@ -9,7 +11,7 @@ const Button = ({ value, onClick }) => {
   );
 };
 
-const Input = ({ type, id, name, label, placeholder, autofocus }) => {
+const Input = ({ type, id, name, label, placeholder, autofocus, value, onChange }) => {
   return (
     <label className="text-gray-500 block mt-3">
       {label}
@@ -19,6 +21,8 @@ const Input = ({ type, id, name, label, placeholder, autofocus }) => {
         id={id}
         name={name}
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
         className="rounded px-4 py-3 w-full mt-1 bg-white text-gray-900 border border-gray-200 focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-100"
       />
     </label>
@@ -26,25 +30,60 @@ const Input = ({ type, id, name, label, placeholder, autofocus }) => {
 };
 
 const Page = () => {
+  const [loginData, setLoginData] = useState({
+    userId: '',
+    userPwd: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://13.125.8.139:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(loginData)
+      });
+      const res = await response.json();
+      localStorage.setItem('token', res.data.accessToken);
+      window.location.href = "/line-chart";
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   return (
     <div className="bg-gray-200 flex justify-center items-center h-screen w-screen">
       <div className=" border-t-8 rounded-sm border-indigo-600 bg-white p-12 shadow-2xl w-96">
         <h1 className="font-bold text-center block text-2xl">Log In</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Input
             type="text"
-            id="id"
-            name="id"
+            id="userId"
+            name="userId"
             label="ID"
             placeholder="ID"
             autofocus={true}
+            value={loginData.userId}
+            onChange={handleChange}
           />
           <Input
             type="password"
-            id="password"
-            name="password"
+            id="userPwd"
+            name="userPwd"
             label="Password"
             placeholder="••••••••••"
+            value={loginData.userPwd}
+            onChange={handleChange}
           />
           <Button value="Submit" />
         </form>

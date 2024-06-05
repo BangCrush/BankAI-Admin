@@ -101,11 +101,23 @@ const formatData = (data, currentMonth) => {
 const LineChart = () => {
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
   const { year } = getCurrentDate();
+  const userToken = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { month } = getCurrentDate();
-        const response = await axios.get('http://13.125.8.139:8080/admin/line-chart', {params: { year: year } });
+        const response = await axios.get('http://13.125.8.139:8080/admin/line-chart',
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Content-Type': 'application/json',
+          },
+          params: {
+            year: year
+          },
+        });
         console.log(response);
         const formattedData = formatData(response.data, month);
         setChartData(formattedData);

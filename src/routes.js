@@ -15,7 +15,7 @@ export const routes = [
     ),
     children: [
       {
-        path: 'PieChart',
+        path: 'pie-chart',
         element: <PieChartPage />,
       },
       {

@@ -7,18 +7,25 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Page = () => {
   const [datalist, setDatalist] = useState([]);
+  const userToken = localStorage.getItem("token");
 
   useEffect(() => {
-    const url = 'http://13.125.8.139:8080/admin/piechart';
-    axios
-      .get(url)
-      .then((res) => {
-        console.log(res.data);
-        setDatalist(res.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://13.125.8.139:8080/admin/pie-chart',
+        {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${userToken}`,
+            'Content-Type': 'application/json',
+          }
+        });
+        setDatalist(response.data.data);
+      } catch (error) {
+        console.error('Error fetching chart data', error);
+      }
+    };
+    fetchData();
   }, []);
 
   const data = {

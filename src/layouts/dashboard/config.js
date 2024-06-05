@@ -5,7 +5,7 @@ import { SvgIcon } from '@mui/material';
 
 export const items = [
   {
-    href: '/PieChart',
+    href: '/pie-chart',
     icon: (
       <SvgIcon>
         <ChartPieIcon />

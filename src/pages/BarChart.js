@@ -19,6 +19,7 @@ const BarChart = () => {
   const [dataByType, setDataByType] = useState([]); // 상품 종류별 데이터
   const [productType, setProductType] = useState(); // 상품 종류
   const [isLoading, setIsLoading] = useState(true);
+  const userToken = localStorage.getItem("token");
 
   const SelectProductTypeButton = ({ value, type }) => {
     return (
@@ -76,7 +77,14 @@ const BarChart = () => {
     const getData = async () => {
       try {
         const response = await fetch(
-          'http://13.125.8.139:8080/admin/bar-chart'
+          'http://13.125.8.139:8080/admin/bar-chart',
+          {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${userToken}`,
+              'Content-Type': 'application/json',
+            },
+          }
         );
         if (!response.ok) throw new Error('!response.ok');
         const data = await response.json();
