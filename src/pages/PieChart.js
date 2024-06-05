@@ -5,6 +5,27 @@ import { Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
+const styles = {
+  contentWrap: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100vh',
+    boxSizing: 'border-box',
+  },
+  chartTitle: {
+    textAlign: 'center',
+    marginBottom: '20px',
+    fontSize: '24px',
+  },
+  contentInner: {
+    width: '80%',
+    maxWidth: '600px',
+  },
+};
+
 const Page = () => {
   const [datalist, setDatalist] = useState([]);
 
@@ -22,10 +43,10 @@ const Page = () => {
   }, []);
 
   const data = {
-    labels: ['입출금', '예금', '적금', '대출'],
+    labels: ['입출금', '예금', '적금', '대출'], 
     datasets: [
       {
-        label: '상품 종류별 가입자 수 비율',
+        label: '상품 종류별 가입자 수',
         data: datalist,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -45,10 +66,18 @@ const Page = () => {
       },
     ],
   };
-
-  return <div style={{ width: '80vw', height: '80vh' }}>
-    <Pie data={data} />
-    </div>;
+  return (
+    <div className='contentWrap' style={styles.contentWrap}>
+      <div style={styles.chartTitle}>
+        상품별 가입자 수 비율
+      </div>
+      <div className='contentInner' style={styles.contentInner}>
+        <Pie data={data} />
+      </div>
+    </div>
+  );
+  
+  
 };
 
 export default Page;

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Layout as DashboardLayout } from './layouts/dashboard/layout';
-import PicChartPage from './pages/PicChart';
+import PieChartPage from './pages/PieChart';
 import NotFoundPage from './pages/404';
 import ReportsPage from './pages';
 import SettingsPage from './pages/settings';
@@ -30,8 +30,8 @@ export const routes = [
         element: <ThemePage />,
       },
       {
-        path: 'PicChart',
-        element: <PicChartPage />,
+        path: 'PieChart',
+        element: <PieChartPage />,
       },
       {
         path: 'login',
