@@ -1,5 +1,11 @@
 import { Link as RouterLink, matchPath, useLocation } from 'react-router-dom';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
 import { items } from './config';
 
 const SIDE_NAV_WIDTH = 73;
@@ -21,13 +27,16 @@ export const SideNav = () => {
           p: 1,
           top: TOP_NAV_HEIGHT,
           width: SIDE_NAV_WIDTH,
-          zIndex: (theme) => theme.zIndex.appBar - 100
-        }
+          zIndex: (theme) => theme.zIndex.appBar - 100,
+        },
       }}
     >
       <List sx={{ width: '100%' }}>
         {items.map((item) => {
-          const active = matchPath({ path: item.href, end: true }, location.pathname);
+          const active = matchPath(
+            { path: item.href, end: true },
+            location.pathname
+          );
 
           return (
             <ListItem
@@ -38,13 +47,13 @@ export const SideNav = () => {
               sx={{
                 flexDirection: 'column',
                 px: 2,
-                py: 1.5
+                py: 1.5,
               }}
             >
               <ListItemIcon
                 sx={{
                   minWidth: 'auto',
-                  color: active ? 'primary.main' : 'neutral.400'
+                  color: active ? '#8785F6' : 'neutral.400',
                 }}
               >
                 {item.icon}
@@ -54,8 +63,8 @@ export const SideNav = () => {
                 primaryTypographyProps={{
                   variant: 'caption',
                   sx: {
-                    color: active ? 'primary.main' : 'text.secondary'
-                  }
+                    color: active ? '#8785F6' : 'text.secondary',
+                  },
                 }}
               />
             </ListItem>
