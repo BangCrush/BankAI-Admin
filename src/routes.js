@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Layout as DashboardLayout } from './layouts/dashboard/layout';
-import IconsPage from './pages/icons';
+import PicChartPage from './pages/PicChart';
 import NotFoundPage from './pages/404';
 import OrdersPage from './pages/orders';
 import ReportsPage from './pages';
@@ -33,8 +33,8 @@ export const routes = [
         element: <ThemePage />,
       },
       {
-        path: 'icons',
-        element: <IconsPage />,
+        path: 'PicChart',
+        element: <PicChartPage />,
       },
       {
         path: 'login',
