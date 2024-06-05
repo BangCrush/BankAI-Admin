@@ -1,6 +1,6 @@
-import ChartPieIcon from "@heroicons/react/24/solid/ChartPieIcon"
-import PresentationChartLineIcon from "@heroicons/react/24/solid/PresentationChartLineIcon"
-import ChartBarIcon from "@heroicons/react/24/solid/ChartBarIcon"
+import ChartPieIcon from '@heroicons/react/24/solid/ChartPieIcon';
+import PresentationChartLineIcon from '@heroicons/react/24/solid/PresentationChartLineIcon';
+import ChartBarIcon from '@heroicons/react/24/solid/ChartBarIcon';
 import { SvgIcon } from '@mui/material';
 
 export const items = [
@@ -11,16 +11,16 @@ export const items = [
         <ChartPieIcon />
       </SvgIcon>
     ),
-    label: 'PieChart'
+    label: 'PieChart',
   },
   {
-    href: '/orders',
+    href: '/bar-chart',
     icon: (
       <SvgIcon>
         <ChartBarIcon />
       </SvgIcon>
     ),
-    label: 'BarChart'
+    label: 'BarChart',
   },
   {
     href: '/line-chart',
@@ -29,6 +29,6 @@ export const items = [
         <PresentationChartLineIcon />
       </SvgIcon>
     ),
-    label: 'LineChart'
-  }
+    label: 'LineChart',
+  },
 ];
