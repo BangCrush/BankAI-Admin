@@ -13,18 +13,18 @@ const LayoutRoot = styled('div')(({ theme }) => ({
   maxWidth: '100%',
   paddingTop: TOP_NAV_HEIGHT,
   [theme.breakpoints.up('lg')]: {
-    paddingLeft: SIDE_NAV_WIDTH
-  }
+    paddingLeft: SIDE_NAV_WIDTH,
+  },
 }));
 
 const LayoutContainer = styled('div')({
   display: 'flex',
   flex: '1 1 auto',
   flexDirection: 'column',
-  width: '100%'
+  width: '100%',
 });
 
-const userToken = localStorage.getItem("token");
+const userToken = localStorage.getItem('token');
 
 export const Layout = (props) => {
   const { children } = props;
@@ -32,16 +32,14 @@ export const Layout = (props) => {
   return (
     <>
       <TopNav />
-      {userToken && <SideNav />} {/* userToken이 있을 때만 SideNav 렌더링 */}
+      <SideNav />
       <LayoutRoot>
-        <LayoutContainer>
-          {children}
-        </LayoutContainer>
+        <LayoutContainer>{children}</LayoutContainer>
       </LayoutRoot>
     </>
   );
 };
 
 Layout.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 };
