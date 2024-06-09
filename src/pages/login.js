@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/modal.css';
+import FailLoginModal from 'src/components/FailLoginModal';
 
 const Button = ({ value, onClick }) => {
   return (
@@ -11,7 +14,16 @@ const Button = ({ value, onClick }) => {
   );
 };
 
-const Input = ({ type, id, name, label, placeholder, autofocus, value, onChange }) => {
+const Input = ({
+  type,
+  id,
+  name,
+  label,
+  placeholder,
+  autofocus,
+  value,
+  onChange,
+}) => {
   return (
     <label className="text-gray-500 block mt-3">
       {label}
@@ -30,32 +42,44 @@ const Input = ({ type, id, name, label, placeholder, autofocus, value, onChange 
 };
 
 const Page = () => {
+  const navigate = useNavigate();
+
+  const [FL_ModalIsOpen, setFL_ModalIsOpen] = useState(false);
+  const openFL_Modal = () => setFL_ModalIsOpen(true);
+  const closeFL_Modal = () => setFL_ModalIsOpen(false);
+
   const [loginData, setLoginData] = useState({
     userId: '',
-    userPwd: ''
+    userPwd: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLoginData(prevState => ({
+    setLoginData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://13.125.8.139:8080/login', {
+      const response = await fetch('http://13.125.8.139:8080/admin/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(loginData)
+        body: JSON.stringify(loginData),
       });
       const res = await response.json();
+
+      if (res.status !== 200) {
+        openFL_Modal();
+        return;
+      }
+
       localStorage.setItem('token', res.data.accessToken);
-      window.location.href = "/line-chart";
+      navigate('/pie-chart');
     } catch (error) {
       console.error('Error:', error);
     }
@@ -88,6 +112,8 @@ const Page = () => {
           <Button value="Submit" />
         </form>
       </div>
+
+      <FailLoginModal isOpen={FL_ModalIsOpen} closeModal={closeFL_Modal} />
     </div>
   );
 };

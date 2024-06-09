@@ -3,23 +3,32 @@ import axios from 'axios';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import '../styles/chart.css';
+import DoLoginModal from 'src/components/DoLoginModal';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Page = () => {
+  const [DL_ModalIsOpen, setDL_ModalIsOpen] = useState(false);
+  const openDL_Modal = () => setDL_ModalIsOpen(true);
+
   const [datalist, setDatalist] = useState([]);
-  const userToken = localStorage.getItem("token");
+  const userToken = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://13.125.8.139:8080/admin/pie-chart',
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${userToken}`,
-            'Content-Type': 'application/json',
+        const response = await axios.get(
+          'http://13.125.8.139:8080/admin/pie-chart',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+              'Content-Type': 'application/json',
+            },
           }
-        });
+        );
+
+        if (response.status !== 200) openDL_Modal();
+
         setDatalist(response.data.data);
       } catch (error) {
         console.error('Error fetching chart data', error);
@@ -29,7 +38,7 @@ const Page = () => {
   }, []);
 
   const data = {
-    labels: ['입출금', '예금', '적금', '대출'], 
+    labels: ['입출금', '예금', '적금', '대출'],
     datasets: [
       {
         label: '상품 종류별 가입자 수',
@@ -53,19 +62,17 @@ const Page = () => {
     ],
   };
   return (
-    <div className='contentWrap'>
-      <div className='chartTitle'>
-        상품별 가입자 수 비율
-      </div>
-      <div className='contentInner'>
-        <div className='contentPieChart'>
+    <div className="contentWrap">
+      <div className="chartTitle">상품별 가입자 수 비율</div>
+      <div className="contentInner">
+        <div className="contentPieChart">
           <Pie data={data} />
         </div>
       </div>
+
+      <DoLoginModal isOpen={DL_ModalIsOpen} />
     </div>
   );
-  
-  
 };
 
 export default Page;

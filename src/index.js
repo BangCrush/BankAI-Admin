@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { App } from './app';
 import './index.css';
+import Modal from 'react-modal';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -14,5 +15,7 @@ root.render(
         <App />
       </Suspense>
     </BrowserRouter>
-  </HelmetProvider>,
+  </HelmetProvider>
 );
+
+Modal.setAppElement('#root');

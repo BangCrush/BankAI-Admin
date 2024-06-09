@@ -4,8 +4,10 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import { grey } from '@mui/material/colors';
 import CustomBarChart from 'src/charts/CustomBarChart';
-import { Container, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import '../styles/chart.css';
+import DoLoginModal from 'src/components/DoLoginModal';
+import FailGetDataModal from 'src/components/FailGetDataModal';
 
 const productTypeNames = {
   CHECKING: '입출금',
@@ -15,11 +17,17 @@ const productTypeNames = {
 };
 
 const BarChart = () => {
+  const [DL_ModalIsOpen, setDL_ModalIsOpen] = useState(false);
+  const openDL_Modal = () => setDL_ModalIsOpen(true);
+  const [FGD_ModalIsOpen, setFGD_ModalIsOpen] = useState(false);
+  const openFGD_Modal = () => setFGD_ModalIsOpen(true);
+  const closeFGD_Modal = () => setFGD_ModalIsOpen(false);
+
   const [data, setData] = useState({});
   const [dataByType, setDataByType] = useState([]); // 상품 종류별 데이터
   const [productType, setProductType] = useState(); // 상품 종류
   const [isLoading, setIsLoading] = useState(true);
-  const userToken = localStorage.getItem("token");
+  const userToken = localStorage.getItem('token');
 
   const SelectProductTypeButton = ({ value, type }) => {
     return (
@@ -29,7 +37,8 @@ const BarChart = () => {
         }}
         sx={{
           color: grey[600],
-          backgroundColor: productType === type ? 'rgba(135, 133, 246, 0.2)' : 'transparent',
+          backgroundColor:
+            productType === type ? 'rgba(135, 133, 246, 0.2)' : 'transparent',
           '&:hover': {
             borderColor: '#8785F6',
             backgroundColor: 'rgba(135, 133, 246, 0.2)',
@@ -81,12 +90,15 @@ const BarChart = () => {
           {
             method: 'GET',
             headers: {
-              'Authorization': `Bearer ${userToken}`,
+              Authorization: `Bearer ${userToken}`,
               'Content-Type': 'application/json',
             },
           }
         );
-        if (!response.ok) throw new Error('!response.ok');
+
+        if (response.status === 500 || !response.ok) openFGD_Modal();
+        if (response.status !== 200) openDL_Modal();
+
         const data = await response.json();
         setData(data);
       } catch (error) {
@@ -108,33 +120,36 @@ const BarChart = () => {
   }, [productType]);
 
   return (
-    <Container
-      maxWidth="xl"
-    >
-      <div className='contentWrap'>
-        {isLoading ? (
-          <Typography variant="h5" 
-            sx={{
-              color: grey[600],
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }
-            }>
-            상품 종류를 선택하세요
-          </Typography>
-        ) : (
-          <>
-            <div className='barchartTitle'>{productTypeNames[productType]} 상품별 가입자 연령대 통계</div>
+    <div className="contentWrap">
+      {isLoading ? (
+        <Typography
+          variant="h5"
+          sx={{
+            color: grey[600],
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          상품 종류를 선택하세요
+        </Typography>
+      ) : (
+        <>
+          <div className="chartTitle">
+            {productTypeNames[productType]} 상품별 가입자 연령대 통계
+          </div>
+          <div className="contentInner">
             <div className="contentChart">
               <CustomBarChart dataByType={dataByType} />
             </div>
-          </>
-        )}
-        <SelectProductTypeBtnGroup />
-      </div>
-      
-    </Container>
+          </div>
+        </>
+      )}
+      <SelectProductTypeBtnGroup />
+
+      <DoLoginModal isOpen={DL_ModalIsOpen} />
+      <FailGetDataModal isOpen={FGD_ModalIsOpen} closeModal={closeFGD_Modal} />
+    </div>
   );
 };
 

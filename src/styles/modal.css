@@ -1,0 +1,8 @@
+.ReactModal__Content {
+  .modalCloseBtn {
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 2px 6px 2px 6px;
+    margin-top: 10px;
+  }
+}

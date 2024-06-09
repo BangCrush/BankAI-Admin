@@ -12,6 +12,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import '../styles/chart.css';
+import DoLoginModal from 'src/components/DoLoginModal';
 
 ChartJS.register(
   CategoryScale,
@@ -37,17 +38,30 @@ export const options = {
         text: '계좌 개설 건수',
         color: 'black', // y축 제목 색상
         font: {
-          size: 12 // y축 제목 크기
-        }
-      }
-    }
-  }
+          size: 12, // y축 제목 크기
+        },
+      },
+    },
+  },
 };
-  
+
 const getMonthName = (monthIndex) => {
-  const monthNames = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+  const monthNames = [
+    '1월',
+    '2월',
+    '3월',
+    '4월',
+    '5월',
+    '6월',
+    '7월',
+    '8월',
+    '9월',
+    '10월',
+    '11월',
+    '12월',
+  ];
   return monthNames[monthIndex];
-}
+};
 
 const getCurrentDate = () => {
   const currentDate = new Date();
@@ -62,7 +76,7 @@ const formatData = (data, currentMonth) => {
     'rgb(255, 99, 132, 0.5)',
     'rgb(53, 162, 235, 0.5)',
     'rgb(102, 204, 102, 0.5)',
-    'rgb(255, 206, 86, 0.5)'
+    'rgb(255, 206, 86, 0.5)',
   ];
   let colorIndex = 0;
 
@@ -73,18 +87,22 @@ const formatData = (data, currentMonth) => {
       sumData[i - 1] += value[i] || 0;
     }
   }
+
   const sumDataset = {
     label: '합계',
     data: sumData,
     borderColor: 'rgb(0, 0, 0, 0.5)',
     backgroundColor: 'rgb(0, 0, 0, 0.5)',
   };
+
   datasets.push(sumDataset);
 
   for (const [key, value] of Object.entries(data)) {
     const dataset = {
       label: key,
-      data: Array.from({ length: currentMonth + 1 }).map((_, i) => value[i + 1] || 0),
+      data: Array.from({ length: currentMonth + 1 }).map(
+        (_, i) => value[i + 1] || 0
+      ),
       borderColor: colors[colorIndex % colors.length],
       backgroundColor: colors[colorIndex % colors.length],
     };
@@ -99,26 +117,33 @@ const formatData = (data, currentMonth) => {
 };
 
 const LineChart = () => {
+  const [DL_ModalIsOpen, setDL_ModalIsOpen] = useState(false);
+  const openDL_Modal = () => setDL_ModalIsOpen(true);
+
   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
   const { year } = getCurrentDate();
-  const userToken = localStorage.getItem("token");
+  const userToken = localStorage.getItem('token');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const response = await axios.get(
+          'http://13.125.8.139:8080/admin/line-chart',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+              'Content-Type': 'application/json',
+            },
+            params: {
+              year: year,
+            },
+          }
+        );
+
+        if (response.status !== 200) openDL_Modal();
+
         const { month } = getCurrentDate();
-        const response = await axios.get('http://13.125.8.139:8080/admin/line-chart',
-        {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${userToken}`,
-            'Content-Type': 'application/json',
-          },
-          params: {
-            year: year
-          },
-        });
-        console.log(response);
         const formattedData = formatData(response.data, month);
         setChartData(formattedData);
       } catch (error) {
@@ -129,13 +154,15 @@ const LineChart = () => {
   }, []);
 
   return (
-    <div className='contentWrap'>
-      <div className='chartTitle'>{year}년 월별 신규 계좌 개설 건수 통계</div>
-      <div className='contentInner'>
-        <div className='contentChart'>
+    <div className="contentWrap">
+      <div className="chartTitle">{year}년 월별 신규 계좌 개설 건수 통계</div>
+      <div className="contentInner">
+        <div className="contentChart">
           <Line options={options} data={chartData} />
         </div>
       </div>
+
+      <DoLoginModal isOpen={DL_ModalIsOpen} />
     </div>
   );
 };
