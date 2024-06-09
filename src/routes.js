@@ -15,12 +15,12 @@ export const routes = [
     ),
     children: [
       {
-        path: 'pie-chart',
-        element: <PieChartPage />,
-      },
-      {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'pie-chart',
+        element: <PieChartPage />,
       },
       {
         path: 'bar-chart',
@@ -29,10 +29,6 @@ export const routes = [
       {
         path: 'line-chart',
         element: <LineChartPage />,
-      },
-      {
-        path: 'bar-chart',
-        element: <BarChartPage />,
       },
     ],
   },
