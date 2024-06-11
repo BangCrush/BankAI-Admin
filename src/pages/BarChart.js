@@ -4,7 +4,6 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import { grey } from '@mui/material/colors';
 import CustomBarChart from 'src/charts/CustomBarChart';
-import { Typography } from '@mui/material';
 import '../styles/chart.css';
 import DoLoginModal from 'src/components/DoLoginModal';
 import FailGetDataModal from 'src/components/FailGetDataModal';
@@ -25,8 +24,7 @@ const BarChart = () => {
 
   const [data, setData] = useState({});
   const [dataByType, setDataByType] = useState([]); // 상품 종류별 데이터
-  const [productType, setProductType] = useState(); // 상품 종류
-  const [isLoading, setIsLoading] = useState(true);
+  const [productType, setProductType] = useState('CHECKING'); // 상품 종류
   const userToken = localStorage.getItem('token');
 
   const SelectProductTypeButton = ({ value, type }) => {
@@ -109,42 +107,29 @@ const BarChart = () => {
     getData();
   }, []);
 
-  useEffect(() => {}, [data]);
+  useEffect(() => {
+    if (data['CHECKING'] && Array.isArray(data['CHECKING'])) {
+      setDataByType(data['CHECKING']);
+    }
+  }, [data]);
 
   useEffect(() => {
-    // 처음 페이지 로딩 시 API 호출이 완료되고 데이터가 삽입되면 실행
     if (data[productType] && Array.isArray(data[productType])) {
       setDataByType(data[productType]);
-      setIsLoading(false);
     }
   }, [productType]);
 
   return (
     <div className="contentWrap">
-      {isLoading ? (
-        <Typography
-          variant="h5"
-          sx={{
-            color: grey[600],
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          상품 종류를 선택하세요
-        </Typography>
-      ) : (
-        <>
-          <div className="chartTitle">
-            {productTypeNames[productType]} 상품별 가입자 연령대 통계
-          </div>
-          <div className="contentInner">
-            <div className="contentChart">
-              <CustomBarChart dataByType={dataByType} />
-            </div>
-          </div>
-        </>
-      )}
+      <div className="chartTitle">
+        {productTypeNames[productType]} 상품별 가입자 연령대 통계
+      </div>
+      <div className="contentInner">
+        <div className="contentChart">
+          <CustomBarChart dataByType={dataByType} />
+        </div>
+      </div>
+
       <SelectProductTypeBtnGroup />
 
       <DoLoginModal isOpen={DL_ModalIsOpen} />
